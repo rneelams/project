@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EventService } from 'src/app/events/Shared/event.service';
 
+declare let toastr;
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'events-lists',
@@ -9,7 +10,8 @@ import { EventService } from 'src/app/events/Shared/event.service';
     <hr/>
     <div class="row">
     <div *ngFor="let event of events" class="col-md-5">
-     <event-thumbnail [event]="event"></event-thumbnail>
+     <event-thumbnail (click)="handleThumbnailClick(event.name)" [event]
+     ="event"></event-thumbnail>
      </div>
      </div>
       </div>
@@ -18,12 +20,15 @@ import { EventService } from 'src/app/events/Shared/event.service';
 export class EventsListComponent {
   events: any[];
   constructor(private eventService: EventService) {
-    this.events = this.eventService.getEvents();
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
     this.events = this.eventService.getEvents();
+  }
+
+  handleThumbnailClick(eventName) {
+    toastr.success(eventName);
   }
 
 }
