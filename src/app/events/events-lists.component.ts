@@ -22,7 +22,7 @@ export class EventsListComponent {
   constructor(private eventService: EventService) {
   }
 
-  // tslint:disable-next-line:use-life-cycle-interface
+
   ngOnInit() {
     this.events = this.eventService.getEvents();
   }
